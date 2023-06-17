@@ -16,7 +16,9 @@ export const getGreetingsFromAPI = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      console.log(error.message);
+      return error
+      // return thunkAPI.rejectWithValue(error);
     }
   },
 );
@@ -33,15 +35,17 @@ export const greetingsSlice = createSlice({
       }))
       .addCase(getGreetingsFromAPI.fulfilled, (state, { payload }) => ({
         ...state,
-        current_user: payload,
+        greetings: payload[0].message,
         status: 'succeed',
         error: null,
       }))
-      .addCase(getGreetingsFromAPI.rejected, (state, action) => ({
+      .addCase(getGreetingsFromAPI.rejected, (state, { error }) => 
+      ({
         ...state,
-        error: action.payload,
+        error: error.message,
         status: 'failed',
-      }));
+      })
+      );
   },
 });
 
