@@ -92,7 +92,7 @@ Example commands:
 
 ```sh
   cd my-folder
-  git clone git@github.com:kensteph/hello-rails-back-end.git
+  git clone git@github.com:kensteph/hello-rails-front-end.git
 ```
 
 -
