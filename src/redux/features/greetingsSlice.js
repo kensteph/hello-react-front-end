@@ -9,14 +9,14 @@ const initialState = {
 
 export const getGreetingsFromAPI = createAsyncThunk(
   'greetings/getGreetingsFromAPI',
-  async (thunkAPI) => {
+  async () => {
     try {
       const response = await axios.get(
         'http://localhost:3000/greetings',
       );
       return response.data;
     } catch (error) {
-      return error
+      return error;
     }
   },
 );
@@ -37,13 +37,11 @@ export const greetingsSlice = createSlice({
         status: 'succeed',
         error: null,
       }))
-      .addCase(getGreetingsFromAPI.rejected, (state, { error }) => 
-      ({
+      .addCase(getGreetingsFromAPI.rejected, (state, { error }) => ({
         ...state,
         error: error.message,
         status: 'failed',
-      })
-      );
+      }));
   },
 });
 
